@@ -1,7 +1,9 @@
 {
     "name": "MedievalRoguelike.Rooms",
     "rootNamespace": "MedievalRoguelike.Rooms",
-    "references": [],
+    "references": [
+        "GUID:0fba698c4d36c448da08a33d6532d355"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

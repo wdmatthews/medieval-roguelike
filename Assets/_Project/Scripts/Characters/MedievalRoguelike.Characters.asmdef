@@ -1,7 +1,10 @@
 {
     "name": "MedievalRoguelike.Characters",
     "rootNamespace": "MedievalRoguelike.Characters",
-    "references": [],
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:1bc2dd41ec0d546f0ae69b4b20d99975"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
