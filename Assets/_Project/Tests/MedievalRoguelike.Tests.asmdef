@@ -2,8 +2,8 @@
     "name": "MedievalRoguelike.Tests",
     "rootNamespace": "MedievalRoguelike.Tests",
     "references": [
-        "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
+        "UnityEngine.TestRunner",
         "MedievalRoguelike.Characters",
         "MedievalRoguelike.Managers",
         "MedievalRoguelike.Rooms",

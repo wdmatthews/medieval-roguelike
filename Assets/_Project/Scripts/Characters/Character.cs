@@ -13,7 +13,7 @@ namespace MedievalRoguelike.Characters
 
         public CharacterSO Data => _data;
 
-        private void Awake()
+        private void Start()
         {
             _rigidbody.gravityScale = _data.Gravity;
         }
