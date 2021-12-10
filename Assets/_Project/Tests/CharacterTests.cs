@@ -17,7 +17,60 @@ namespace MedievalRoguelike.Tests
 
                 yield return null;
 
-                Assert.AreEqual(gravityScale, character.GetComponent<Rigidbody2D>().gravityScale);
+                Assert.IsTrue(Mathf.Approximately(gravityScale, character.GetComponent<Rigidbody2D>().gravityScale));
+            }
+        }
+
+        public class Spawn
+        {
+            [Test]
+            public void SetsPosition()
+            {
+                Character character = A.Character;
+                Transform transform = new GameObject().transform;
+                transform.position = new Vector3(1, 1, 1);
+
+                character.Spawn(transform, null);
+
+                Assert.IsTrue(Mathf.Approximately(transform.position.x, character.transform.position.x));
+                Assert.IsTrue(Mathf.Approximately(transform.position.y, character.transform.position.y));
+                Assert.IsTrue(Mathf.Approximately(transform.position.z, character.transform.position.z));
+            }
+
+            [Test]
+            public void SetsRotation()
+            {
+                Character character = A.Character;
+                Transform transform = new GameObject().transform;
+                transform.eulerAngles = new Vector3(1, 1, 1);
+
+                character.Spawn(transform, null);
+
+                Assert.IsTrue(Mathf.Approximately(transform.eulerAngles.x, character.transform.eulerAngles.x));
+                Assert.IsTrue(Mathf.Approximately(transform.eulerAngles.y, character.transform.eulerAngles.y));
+                Assert.IsTrue(Mathf.Approximately(transform.eulerAngles.z, character.transform.eulerAngles.z));
+            }
+
+            [Test]
+            public void SetsHealthToMax()
+            {
+                Character character = A.Character;
+
+                character.Spawn(new GameObject().transform, null);
+
+                Assert.IsTrue(Mathf.Approximately(character.Data.MaxHealth, character.Health));
+            }
+
+            [Test]
+            public void EnablesHitbox()
+            {
+                Character character = A.Character;
+                BoxCollider2D hitbox = character.GetComponent<BoxCollider2D>();
+                hitbox.enabled = false;
+
+                character.Spawn(new GameObject().transform, null);
+
+                Assert.AreEqual(true, hitbox.enabled);
             }
         }
 
@@ -32,7 +85,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(0);
 
-                Assert.AreEqual(0, rigidbody.velocity.x);
+                Assert.IsTrue(Mathf.Approximately(0, rigidbody.velocity.x));
             }
 
             [Test]
@@ -44,7 +97,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(0);
 
-                Assert.AreEqual(0, rigidbody.velocity.x);
+                Assert.IsTrue(Mathf.Approximately(0, rigidbody.velocity.x));
             }
 
             [Test]
@@ -55,7 +108,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(1);
 
-                Assert.AreEqual(character.Data.MoveSpeed, rigidbody.velocity.x);
+                Assert.IsTrue(Mathf.Approximately(character.Data.MoveSpeed, rigidbody.velocity.x));
             }
 
             [Test]
@@ -66,7 +119,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(-1);
 
-                Assert.AreEqual(-character.Data.MoveSpeed, rigidbody.velocity.x);
+                Assert.IsTrue(Mathf.Approximately(-character.Data.MoveSpeed, rigidbody.velocity.x));
             }
 
             [Test]
@@ -77,7 +130,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(0);
 
-                Assert.AreEqual(yAngle, character.transform.eulerAngles.y);
+                Assert.IsTrue(Mathf.Approximately(yAngle, character.transform.eulerAngles.y));
             }
 
             [Test]
@@ -88,7 +141,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(1);
 
-                Assert.AreEqual(0, character.transform.eulerAngles.y);
+                Assert.IsTrue(Mathf.Approximately(0, character.transform.eulerAngles.y));
             }
 
             [Test]
@@ -99,7 +152,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(1);
 
-                Assert.AreEqual(0, character.transform.eulerAngles.y);
+                Assert.IsTrue(Mathf.Approximately(0, character.transform.eulerAngles.y));
             }
 
             [Test]
@@ -110,7 +163,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(-1);
 
-                Assert.AreEqual(180, character.transform.eulerAngles.y);
+                Assert.IsTrue(Mathf.Approximately(180, character.transform.eulerAngles.y));
             }
 
             [Test]
@@ -121,7 +174,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Move(-1);
 
-                Assert.AreEqual(180, character.transform.eulerAngles.y);
+                Assert.IsTrue(Mathf.Approximately(180, character.transform.eulerAngles.y));
             }
         }
 
@@ -142,7 +195,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Jump();
 
-                Assert.AreEqual(0, rigidbody.velocity.y);
+                Assert.IsTrue(Mathf.Approximately(0, rigidbody.velocity.y));
             }
 
             [Test]
@@ -158,7 +211,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Jump();
 
-                Assert.AreEqual(yVelocity, rigidbody.velocity.y);
+                Assert.IsTrue(Mathf.Approximately(yVelocity, rigidbody.velocity.y));
             }
 
             [Test]
@@ -174,7 +227,7 @@ namespace MedievalRoguelike.Tests
 
                 character.Jump();
 
-                Assert.AreEqual(yVelocity, rigidbody.velocity.y);
+                Assert.IsTrue(Mathf.Approximately(yVelocity, rigidbody.velocity.y));
             }
 
             [UnityTest]
@@ -189,6 +242,71 @@ namespace MedievalRoguelike.Tests
                 character.Jump();
 
                 Assert.Greater(rigidbody.velocity.y, 0);
+            }
+        }
+
+        public class TakeDamage
+        {
+            [Test]
+            public void DamageIsLessThanHealth_DecreasesHealthByDamage([Values(1, 2, 3)] float maxHealth)
+            {
+                Character character = A.Character.WithData(A.Default.CharacterSO.WithMaxHealth(maxHealth));
+                character.Spawn(new GameObject().transform, null);
+
+                character.TakeDamage(maxHealth / 2);
+
+                Assert.IsTrue(Mathf.Approximately(character.Data.MaxHealth - maxHealth / 2, character.Health));
+            }
+
+            [Test]
+            public void DamageIsHealth_SetsDeadToTrue()
+            {
+                Character character = A.Character.WithData(A.Default.CharacterSO.WithMaxHealth(1));
+                character.Spawn(new GameObject().transform, null);
+
+                character.TakeDamage(1);
+
+                Assert.IsTrue(character.IsDead);
+            }
+
+            [Test]
+            public void DamageIsHealth_SetsXVelocityToZero()
+            {
+                Character character = A.Character.WithData(A.Default.CharacterSO.WithMaxHealth(1));
+                Rigidbody2D rigidbody = character.GetComponent<Rigidbody2D>();
+                rigidbody.velocity = new Vector2(1, 0);
+                character.Spawn(new GameObject().transform, null);
+
+                character.TakeDamage(1);
+
+                Assert.IsTrue(Mathf.Approximately(0, rigidbody.velocity.x));
+            }
+
+            [Test]
+            public void DamageIsHealth_DisablesHitbox()
+            {
+                Character character = A.Character.WithData(A.Default.CharacterSO.WithMaxHealth(1));
+                Rigidbody2D rigidbody = character.GetComponent<Rigidbody2D>();
+                BoxCollider2D hitbox = character.GetComponent<BoxCollider2D>();
+                hitbox.enabled = true;
+                character.Spawn(new GameObject().transform, null);
+
+                character.TakeDamage(1);
+
+                Assert.IsFalse(hitbox.enabled);
+            }
+
+            [Test]
+            public void DamageIsHealth_InvokesOnDeath()
+            {
+                Character character = A.Character.WithData(A.Default.CharacterSO.WithMaxHealth(1));
+                bool invoked = false;
+                
+                character.Spawn(new GameObject().transform, () => invoked = true);
+
+                character.TakeDamage(1);
+
+                Assert.IsTrue(invoked);
             }
         }
     }

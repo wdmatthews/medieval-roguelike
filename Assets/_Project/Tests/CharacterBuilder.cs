@@ -24,6 +24,8 @@ namespace MedievalRoguelike.Tests
                 .objectReferenceValue = _data;
             serializedCharacter.FindProperty("_rigidbody")
                 .objectReferenceValue = character.gameObject.AddComponent<Rigidbody2D>();
+            serializedCharacter.FindProperty("_hitbox")
+                .objectReferenceValue = character.gameObject.AddComponent<BoxCollider2D>();
             serializedCharacter.FindProperty("_groundLayer")
                 .intValue = LayerMask.GetMask("Ground");
             serializedCharacter.ApplyModifiedProperties();

@@ -5,6 +5,7 @@ namespace MedievalRoguelike.Characters
     [CreateAssetMenu(fileName = "New Character", menuName = "Medieval Roguelike/Characters/Character")]
     public class CharacterSO : ScriptableObject
     {
+        [SerializeField] private float _maxHealth;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpHeight;
         [SerializeField] private float _gravity;
@@ -12,6 +13,7 @@ namespace MedievalRoguelike.Characters
         [SerializeField] private float _groundCheckPosition;
         [SerializeField] private Vector2 _groundCheckSize;
 
+        public float MaxHealth => _maxHealth;
         public float MoveSpeed => _moveSpeed;
         public float JumpHeight => _jumpHeight;
         public float Gravity => _gravity;

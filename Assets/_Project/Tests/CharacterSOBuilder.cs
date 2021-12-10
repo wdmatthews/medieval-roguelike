@@ -6,12 +6,19 @@ namespace MedievalRoguelike.Tests
 {
     public class CharacterSOBuilder
     {
+        private float _maxHealth;
         private float _moveSpeed;
         private float _jumpHeight;
         private float _gravity;
         private bool _canJump;
         private float _groundCheckPosition;
         private Vector2 _groundCheckSize;
+
+        public CharacterSOBuilder WithMaxHealth(float maxHealth)
+        {
+            _maxHealth = maxHealth;
+            return this;
+        }
 
         public CharacterSOBuilder WithMoveSpeed(float moveSpeed)
         {
@@ -54,6 +61,8 @@ namespace MedievalRoguelike.Tests
             CharacterSO characterData = ScriptableObject.CreateInstance<CharacterSO>();
 
             SerializedObject serializedCharacter = new SerializedObject(characterData);
+            serializedCharacter.FindProperty("_maxHealth")
+                .floatValue = _maxHealth;
             serializedCharacter.FindProperty("_moveSpeed")
                 .floatValue = _moveSpeed;
             serializedCharacter.FindProperty("_jumpHeight")
