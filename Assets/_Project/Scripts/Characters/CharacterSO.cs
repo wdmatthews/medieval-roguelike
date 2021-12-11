@@ -12,6 +12,7 @@ namespace MedievalRoguelike.Characters
         [SerializeField] private bool _canJump;
         [SerializeField] private float _groundCheckPosition;
         [SerializeField] private Vector2 _groundCheckSize;
+        [SerializeField] private AbilitySO[] _abilities;
 
         public float MaxHealth => _maxHealth;
         public float MoveSpeed => _moveSpeed;
@@ -20,5 +21,6 @@ namespace MedievalRoguelike.Characters
         public bool CanJump => _canJump;
         public float GroundCheckDistance => _groundCheckPosition;
         public Vector2 GroundCheckSize => _groundCheckSize;
+        public AbilitySO[] Abilities => _abilities;
     }
 }

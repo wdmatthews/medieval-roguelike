@@ -19,3 +19,9 @@ MonoBehaviour:
   _canJump: 1
   _groundCheckPosition: 0.5
   _groundCheckSize: {x: 0.95, y: 0.1}
+  _abilities:
+  - {fileID: 11400000, guid: 49f63eaae8eb14596b9111e741a11560, type: 2}
+  - {fileID: 11400000, guid: 294634f8d8812431cb303c3e4f9779dd, type: 2}
+  - {fileID: 11400000, guid: a5bdbac1d1ee1480dba43605928da26b, type: 2}
+  - {fileID: 11400000, guid: 4cab4208756534e22969ce27aa96f924, type: 2}
+  - {fileID: 11400000, guid: 4a3fa8cac5686402cb73dc1c85ab600d, type: 2}
