@@ -19,7 +19,9 @@ namespace MedievalRoguelike.Characters
         protected Dictionary<AbilityType, Ability> _abilitiesByType;
         protected Ability _activeAbility;
         protected bool _isDodging;
+        protected bool _isBlocking;
         protected DodgeSO _dodgeData;
+        protected BlockSO _blockData;
 
         public CharacterSO Data => _data;
         public float Health => _health;
@@ -27,6 +29,7 @@ namespace MedievalRoguelike.Characters
         public Dictionary<AbilityType, Ability> AbilitiesByType => _abilitiesByType;
         public Ability ActiveAbility => _activeAbility;
         public bool IsDodging => _isDodging;
+        public bool IsBlocking => _isBlocking;
 
         protected void Start()
         {
@@ -101,7 +104,8 @@ namespace MedievalRoguelike.Characters
         public bool TakeDamage(float amount)
         {
             if (_isDead || _isDodging) return true;
-            _health = Mathf.Clamp(_health - amount, 0, _data.MaxHealth);
+            float actualAmount = _isBlocking ? (1 - _blockData.BlockPercentage) * amount : amount;
+            _health = Mathf.Clamp(_health - actualAmount, 0, _data.MaxHealth);
             if (Mathf.Approximately(_health, 0)) Die();
             return _isDead;
         }
@@ -118,6 +122,25 @@ namespace MedievalRoguelike.Characters
         {
             _isDodging = false;
             _hitbox.enabled = true;
+        }
+
+        public void StartBlock()
+        {
+            _isBlocking = true;
+            _blockData = (BlockSO)_activeAbility.Data;
+            ((Block)_activeAbility).CancelBlock = CancelBlock;
+        }
+
+        public void EndBlock()
+        {
+            _isBlocking = false;
+        }
+
+        public void CancelBlock()
+        {
+            if (!_isBlocking) return;
+            _activeAbility.Cancel(this);
+            _activeAbility = null;
         }
 
         public void OnAbilityAnimationTick()
@@ -164,7 +187,11 @@ namespace MedievalRoguelike.Characters
 
         protected void AttemptToCancelActiveAbility()
         {
-            if (_activeAbility != null && _activeAbility.CanBeCancelledBy(null)) _activeAbility.Cancel(this);
+            if (_activeAbility != null && _activeAbility.CanBeCancelledBy(null))
+            {
+                _activeAbility.Cancel(this);
+                _activeAbility = null;
+            }
         }
 
         protected void ResetAbilities()

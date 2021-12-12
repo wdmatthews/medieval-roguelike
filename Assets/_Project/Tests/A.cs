@@ -8,6 +8,7 @@ namespace MedievalRoguelike.Tests
         public static CharacterBuilder Character => new CharacterBuilder();
         public static GroundBuilder Ground => new GroundBuilder();
         public static DodgeSOBuilder DodgeSO => new DodgeSOBuilder();
+        public static BlockSOBuilder BlockSO => new BlockSOBuilder();
 
         public static class Default
         {
@@ -20,6 +21,11 @@ namespace MedievalRoguelike.Tests
                 .WithGroundCheckSize(new Vector2(1, 1));
             public static DodgeSOBuilder DodgeSO => A.DodgeSO
                 .WithDodgeSpeed(1)
+                .WithCooldownDuration(1);
+            public static BlockSOBuilder BlockSO => A.BlockSO
+                .WithBlockPercentage(0.5f)
+                .WithMinBlockDuration(1)
+                .WithMaxBlockDuration(2)
                 .WithCooldownDuration(1);
         }
     }

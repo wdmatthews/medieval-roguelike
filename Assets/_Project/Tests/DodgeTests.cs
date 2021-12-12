@@ -46,7 +46,9 @@ namespace MedievalRoguelike.Tests
                 character.UseAbility(AbilityType.Dodge);
                 character.OnAbilityAnimationEnd();
 
+                Time.timeScale = 60;
                 yield return new WaitForSeconds(dodgeData.CooldownDuration);
+                Time.timeScale = 1;
 
                 Assert.IsTrue(dodge.CanUse);
             }

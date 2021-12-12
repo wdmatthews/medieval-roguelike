@@ -128,6 +128,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 917c1b90-fb13-4a75-9fd4-17458c95a306
     m_ActionName: Gameplay/Dodge[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2886235312584171417}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Characters.Player, MedievalRoguelike.Characters
+        m_MethodName: UseBlock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 51a1ea06-48ac-4716-b144-9cf024023fe1
+    m_ActionName: Gameplay/Block[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

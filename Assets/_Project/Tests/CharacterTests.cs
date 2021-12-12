@@ -307,6 +307,24 @@ namespace MedievalRoguelike.Tests
 
                 Assert.IsTrue(invoked);
             }
+
+            [UnityTest]
+            public IEnumerator IsBlocking_TakesPercentOfDamage()
+            {
+                BlockSO blockData = A.Default.BlockSO;
+                Character character = A.Character.WithData(
+                    A.Default.CharacterSO
+                        .WithMaxHealth(1)
+                        .WithAbilities(blockData)
+                );
+                yield return null;
+                character.Spawn(new GameObject().transform, null);
+                character.UseAbility(AbilityType.Block);
+
+                character.TakeDamage(1);
+
+                Assert.IsTrue(Mathf.Approximately(character.Data.MaxHealth * blockData.BlockPercentage, character.Health));
+            }
         }
 
         public class StartDodge
@@ -388,6 +406,35 @@ namespace MedievalRoguelike.Tests
                 character.EndDodge();
 
                 Assert.IsTrue(hitbox.enabled);
+            }
+        }
+
+        public class StartBlock
+        {
+            [UnityTest]
+            public IEnumerator SetsIsBlockingToTrue()
+            {
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(A.Default.BlockSO));
+                yield return null;
+
+                character.UseAbility(AbilityType.Block);
+
+                Assert.IsTrue(character.IsBlocking);
+            }
+        }
+
+        public class EndBlock
+        {
+            [UnityTest]
+            public IEnumerator SetsIsBlockingToFalse()
+            {
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(A.Default.BlockSO));
+                yield return null;
+                character.UseAbility(AbilityType.Block);
+
+                character.EndBlock();
+
+                Assert.IsFalse(character.IsBlocking);
             }
         }
     }

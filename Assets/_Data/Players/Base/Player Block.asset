@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82cd5112be720418da92f371a8e6601a, type: 3}
   m_Name: Player Block
   m_EditorClassIdentifier: 
+  _blockPercentage: 0.5
+  _minBlockDuration: 1
+  _maxBlockDuration: 3
+  _cooldownDuration: 1
