@@ -18,11 +18,15 @@ namespace MedievalRoguelike.Characters
         protected Ability[] _abilities;
         protected Dictionary<AbilityType, Ability> _abilitiesByType;
         protected Ability _activeAbility;
+        protected bool _isDodging;
+        protected DodgeSO _dodgeData;
 
         public CharacterSO Data => _data;
         public float Health => _health;
         public bool IsDead => _isDead;
+        public Dictionary<AbilityType, Ability> AbilitiesByType => _abilitiesByType;
         public Ability ActiveAbility => _activeAbility;
+        public bool IsDodging => _isDodging;
 
         protected void Start()
         {
@@ -66,7 +70,7 @@ namespace MedievalRoguelike.Characters
 
         public void Move(float direction)
         {
-            if (_isDead) return;
+            if (_isDead || _isDodging) return;
             Vector2 velocity = _rigidbody.velocity;
             velocity.x = direction * _data.MoveSpeed;
             _rigidbody.velocity = velocity;
@@ -76,7 +80,7 @@ namespace MedievalRoguelike.Characters
 
         public void Jump()
         {
-            if (_isDead || !_isGrounded || !_data.CanJump) return;
+            if (_isDead || _isDodging || !_isGrounded || !_data.CanJump) return;
             Vector2 velocity = _rigidbody.velocity;
             _isGrounded = false;
             velocity.y = Mathf.Sqrt(-2 * _data.Gravity * Physics2D.gravity.y * _data.JumpHeight);
@@ -86,7 +90,7 @@ namespace MedievalRoguelike.Characters
 
         public void UseAbility(AbilityType type)
         {
-            if (!_isDead) return;
+            if (_isDead || _isDodging) return;
             Ability ability;
             if (!_abilitiesByType.TryGetValue(type, out ability) || !ability.CanUse) return;
             if (_activeAbility != null && !_activeAbility.CanBeCancelledBy(ability.Data)) return;
@@ -96,10 +100,24 @@ namespace MedievalRoguelike.Characters
 
         public bool TakeDamage(float amount)
         {
-            if (_isDead) return true;
+            if (_isDead || _isDodging) return true;
             _health = Mathf.Clamp(_health - amount, 0, _data.MaxHealth);
             if (Mathf.Approximately(_health, 0)) Die();
             return _isDead;
+        }
+
+        public void StartDodge()
+        {
+            _isDodging = true;
+            _dodgeData = (DodgeSO)_activeAbility.Data;
+            _rigidbody.velocity = _dodgeData.DodgeSpeed * transform.right;
+            _hitbox.enabled = false;
+        }
+
+        public void EndDodge()
+        {
+            _isDodging = false;
+            _hitbox.enabled = true;
         }
 
         public void OnAbilityAnimationTick()

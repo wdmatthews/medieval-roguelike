@@ -15,5 +15,10 @@ namespace MedievalRoguelike.Characters
         {
             if (context.performed) Jump();
         }
+
+        public void UseDodge(InputAction.CallbackContext context)
+        {
+            if (context.performed) UseAbility(AbilityType.Dodge);
+        }
     }
 }

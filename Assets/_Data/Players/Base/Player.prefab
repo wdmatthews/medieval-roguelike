@@ -112,6 +112,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ff8ea63f-8ff5-4e16-9d7e-61a35098b2bb
     m_ActionName: Gameplay/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2886235312584171417}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Characters.Player, MedievalRoguelike.Characters
+        m_MethodName: UseDodge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 917c1b90-fb13-4a75-9fd4-17458c95a306
+    m_ActionName: Gameplay/Dodge[/Keyboard/w]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

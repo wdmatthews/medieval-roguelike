@@ -301,12 +301,93 @@ namespace MedievalRoguelike.Tests
             {
                 Character character = A.Character.WithData(A.Default.CharacterSO.WithMaxHealth(1));
                 bool invoked = false;
-                
                 character.Spawn(new GameObject().transform, () => invoked = true);
 
                 character.TakeDamage(1);
 
                 Assert.IsTrue(invoked);
+            }
+        }
+
+        public class StartDodge
+        {
+            [UnityTest]
+            public IEnumerator SetsIsDodgingToTrue()
+            {
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(A.Default.DodgeSO));
+                yield return null;
+
+                character.UseAbility(AbilityType.Dodge);
+
+                Assert.IsTrue(character.IsDodging);
+            }
+
+            [UnityTest]
+            public IEnumerator FacingRight_SetsXVelocityToPositiveDodgeSpeed()
+            {
+                DodgeSO dodgeData = A.Default.DodgeSO;
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(dodgeData));
+                character.transform.eulerAngles = new Vector3(0, 0, 0);
+                Rigidbody2D rigidbody = character.GetComponent<Rigidbody2D>();
+                yield return null;
+
+                character.UseAbility(AbilityType.Dodge);
+
+                Assert.IsTrue(Mathf.Approximately(dodgeData.DodgeSpeed, rigidbody.velocity.x));
+            }
+
+            [UnityTest]
+            public IEnumerator FacingLeft_SetsXVelocityToNegativeDodgeSpeed()
+            {
+                DodgeSO dodgeData = A.Default.DodgeSO;
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(dodgeData));
+                character.transform.eulerAngles = new Vector3(0, 180, 0);
+                Rigidbody2D rigidbody = character.GetComponent<Rigidbody2D>();
+                yield return null;
+
+                character.UseAbility(AbilityType.Dodge);
+
+                Assert.IsTrue(Mathf.Approximately(-dodgeData.DodgeSpeed, rigidbody.velocity.x));
+            }
+
+            [UnityTest]
+            public IEnumerator DisablesHitbox()
+            {
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(A.Default.DodgeSO));
+                BoxCollider2D hitbox = character.GetComponent<BoxCollider2D>();
+                yield return null;
+
+                character.UseAbility(AbilityType.Dodge);
+
+                Assert.IsFalse(hitbox.enabled);
+            }
+        }
+
+        public class EndDodge
+        {
+            [UnityTest]
+            public IEnumerator SetsIsDodgingToFalse()
+            {
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(A.Default.DodgeSO));
+                yield return null;
+                character.UseAbility(AbilityType.Dodge);
+
+                character.EndDodge();
+
+                Assert.IsFalse(character.IsDodging);
+            }
+
+            [UnityTest]
+            public IEnumerator EnablesHitbox()
+            {
+                Character character = A.Character.WithData(A.CharacterSO.WithAbilities(A.Default.DodgeSO));
+                BoxCollider2D hitbox = character.GetComponent<BoxCollider2D>();
+                yield return null;
+                character.UseAbility(AbilityType.Dodge);
+
+                character.EndDodge();
+
+                Assert.IsTrue(hitbox.enabled);
             }
         }
     }
