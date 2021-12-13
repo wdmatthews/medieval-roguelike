@@ -10,6 +10,7 @@ namespace MedievalRoguelike.Characters
         [SerializeField] protected Rigidbody2D _rigidbody;
         [SerializeField] protected Collider2D _hitbox;
         [SerializeField] protected LayerMask _groundLayer;
+        [SerializeField] protected LayerMask _opponentLayer;
 
         protected bool _isGrounded;
         protected float _health;
@@ -24,12 +25,15 @@ namespace MedievalRoguelike.Characters
         protected BlockSO _blockData;
 
         public CharacterSO Data => _data;
+        public LayerMask OpponentLayer => _opponentLayer;
         public float Health => _health;
         public bool IsDead => _isDead;
         public Dictionary<AbilityType, Ability> AbilitiesByType => _abilitiesByType;
         public Ability ActiveAbility => _activeAbility;
         public bool IsDodging => _isDodging;
         public bool IsBlocking => _isBlocking;
+        public int Points { get; set; }
+        public int Kills { get; set; }
 
         protected void Start()
         {
@@ -101,13 +105,12 @@ namespace MedievalRoguelike.Characters
             ability.Use(this);
         }
 
-        public bool TakeDamage(float amount)
+        public void PlayAttackAnimation(AbilityType type)
         {
-            if (_isDead || _isDodging) return true;
-            float actualAmount = _isBlocking ? (1 - _blockData.BlockPercentage) * amount : amount;
-            _health = Mathf.Clamp(_health - actualAmount, 0, _data.MaxHealth);
-            if (Mathf.Approximately(_health, 0)) Die();
-            return _isDead;
+            int animationNumber = 0;
+            if (type == AbilityType.Attack1) animationNumber = 1;
+            else if (type == AbilityType.Attack2) animationNumber = 2;
+            else if (type == AbilityType.Attack3) animationNumber = 3;
         }
 
         public void StartDodge()
@@ -152,6 +155,15 @@ namespace MedievalRoguelike.Characters
         {
             _activeAbility?.OnAnimationEnd(this);
             _activeAbility = null;
+        }
+
+        public bool TakeDamage(float amount)
+        {
+            if (_isDead || _isDodging) return true;
+            float actualAmount = _isBlocking ? (1 - _blockData.BlockPercentage) * amount : amount;
+            _health = Mathf.Clamp(_health - actualAmount, 0, _data.MaxHealth);
+            if (Mathf.Approximately(_health, 0)) Die();
+            return _isDead;
         }
 
         protected void FaceCorrectDirection(float direction)

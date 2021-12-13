@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5734b3efeb5b47b0b93cc6bb782aed1, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  _maxHealth: 1
+  _moveSpeed: 4
+  _jumpHeight: 2.5
+  _gravity: 3
+  _canJump: 1
+  _groundCheckPosition: 0.5
+  _groundCheckSize: {x: 0.95, y: 0.1}
+  _abilities:
+  - {fileID: 11400000, guid: 6a376962acbb942b1b36a8b541d46d83, type: 2}
+  - {fileID: 11400000, guid: 2f95a9f33c2b343d8a78f3ab4432637a, type: 2}
+  - {fileID: 11400000, guid: d1b7f24f168134777835728a11d2e839, type: 2}
+  - {fileID: 11400000, guid: df93f04fea2c543c481750c350d96b73, type: 2}
+  - {fileID: 11400000, guid: feef11ce564cd499fa3ba0cee6b35109, type: 2}
+  _pointValue: 1

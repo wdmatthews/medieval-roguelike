@@ -16,6 +16,21 @@ namespace MedievalRoguelike.Characters
             if (context.performed) Jump();
         }
 
+        public void UseAttack1(InputAction.CallbackContext context)
+        {
+            if (context.performed) UseAbility(AbilityType.Attack1);
+        }
+
+        public void UseAttack2(InputAction.CallbackContext context)
+        {
+            if (context.performed) UseAbility(AbilityType.Attack2);
+        }
+
+        public void UseAttack3(InputAction.CallbackContext context)
+        {
+            if (context.performed) UseAbility(AbilityType.Attack3);
+        }
+
         public void UseDodge(InputAction.CallbackContext context)
         {
             if (context.performed) UseAbility(AbilityType.Dodge);

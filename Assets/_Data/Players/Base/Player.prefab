@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2886235312584171415}
   - component: {fileID: 2886235312584171412}
   - component: {fileID: 2263791663316381329}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,6 +55,9 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  _opponentLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &2886235312584171414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +147,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 51a1ea06-48ac-4716-b144-9cf024023fe1
     m_ActionName: Gameplay/Block[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2886235312584171417}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Characters.Player, MedievalRoguelike.Characters
+        m_MethodName: UseAttack1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 33b2774e-6d28-48a4-962a-16353e9161b0
+    m_ActionName: Gameplay/Attack1[/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2886235312584171417}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Characters.Player, MedievalRoguelike.Characters
+        m_MethodName: UseAttack2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5c4b6a4-e2f6-4591-bc41-38c0d09eb4df
+    m_ActionName: Gameplay/Attack2[/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2886235312584171417}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Characters.Player, MedievalRoguelike.Characters
+        m_MethodName: UseAttack3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 42f56e37-33df-41ff-a345-01b5f2ab1efb
+    m_ActionName: Gameplay/Attack3[/Keyboard/upArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

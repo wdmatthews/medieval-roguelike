@@ -6,7 +6,7 @@ namespace MedievalRoguelike.Characters
 
         public AbilitySO Data => _data;
         public abstract AbilityType Type { get; }
-        public virtual bool CanUse { get; }
+        public virtual bool CanUse => true;
 
         public static Ability Create(AbilityType type, AbilitySO data)
         {

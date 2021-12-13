@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21dffa081322412b83d4b63bd1648af, type: 3}
   m_Name: Player Attack 1
   m_EditorClassIdentifier: 
+  _type: 0
+  _damage: 1
+  _hitboxPosition: {x: 1, y: 0}
+  _hitboxSize: {x: 1, y: 1}
