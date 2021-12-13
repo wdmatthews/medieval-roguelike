@@ -15,7 +15,7 @@ namespace MedievalRoguelike.Characters
         protected bool _isGrounded;
         protected float _health;
         protected bool _isDead;
-        protected System.Action _onDeath;
+        protected System.Action<Character> _onDeath;
         protected Ability[] _abilities;
         protected Dictionary<AbilityType, Ability> _abilitiesByType;
         protected Ability _activeAbility;
@@ -64,12 +64,17 @@ namespace MedievalRoguelike.Characters
             DetectGround();
         }
 
-        public void Spawn(Transform spawnPoint, System.Action onDeath)
+        public void Spawn(Transform spawnPoint, System.Action<Character> onDeath)
+        {
+            _health = _data.MaxHealth;
+            _onDeath = onDeath;
+            Spawn(spawnPoint);
+        }
+
+        public void Spawn(Transform spawnPoint)
         {
             transform.position = spawnPoint.position;
             transform.eulerAngles = spawnPoint.eulerAngles;
-            _health = _data.MaxHealth;
-            _onDeath = onDeath;
             _rigidbody.velocity = new Vector2();
             _hitbox.enabled = true;
             ResetAbilities();
@@ -221,7 +226,7 @@ namespace MedievalRoguelike.Characters
             _isDead = true;
             _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
             _hitbox.enabled = false;
-            _onDeath?.Invoke();
+            _onDeath?.Invoke(this);
         }
     }
 }
