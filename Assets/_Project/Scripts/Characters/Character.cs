@@ -73,8 +73,12 @@ namespace MedievalRoguelike.Characters
 
         public void Spawn(Transform spawnPoint)
         {
-            transform.position = spawnPoint.position;
-            transform.eulerAngles = spawnPoint.eulerAngles;
+            if (spawnPoint)
+            {
+                transform.position = spawnPoint.position;
+                transform.eulerAngles = spawnPoint.eulerAngles;
+            }
+            
             _rigidbody.velocity = new Vector2();
             _hitbox.enabled = true;
             ResetAbilities();

@@ -32,8 +32,8 @@ namespace MedievalRoguelike.Rooms
 
             foreach (Room roomPrefab in _roomPrefabs)
             {
-                if (roomPrefab.name != previousRoom.name
-                    && roomPrefab.EnemySpawnPointCount >= difficulty * 2) validRoomPrefabs.Add(roomPrefab);
+                if (!previousRoom || (roomPrefab.name != previousRoom.name
+                    && roomPrefab.EnemySpawnPointCount >= difficulty * 2)) validRoomPrefabs.Add(roomPrefab);
             }
 
             return validRoomPrefabs[Random.Range(0, validRoomPrefabs.Count)];

@@ -35,7 +35,7 @@ namespace MedievalRoguelike.Rooms
             return room;
         }
 
-        public void SpawnPlayers(Player[] players)
+        public void SpawnPlayers(List<Player> players)
         {
             foreach (Player player in players)
             {
