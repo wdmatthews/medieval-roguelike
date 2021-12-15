@@ -50,11 +50,6 @@ namespace MedievalRoguelike.Characters
             }
         }
 
-        public override void OnAnimationEnd(Character character)
-        {
-            Cancel(character);
-        }
-
         public override void Cancel(Character character)
         {
             _isBlocking = false;

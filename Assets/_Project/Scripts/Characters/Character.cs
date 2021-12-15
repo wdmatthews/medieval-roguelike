@@ -9,6 +9,7 @@ namespace MedievalRoguelike.Characters
         [SerializeField] protected CharacterSO _data;
         [SerializeField] protected Rigidbody2D _rigidbody;
         [SerializeField] protected Collider2D _hitbox;
+        [SerializeField] protected CharacterAnimator _animator;
         [SerializeField] protected LayerMask _groundLayer;
         [SerializeField] protected LayerMask _opponentLayer;
 
@@ -81,7 +82,12 @@ namespace MedievalRoguelike.Characters
             
             _rigidbody.velocity = new Vector2();
             _hitbox.enabled = true;
+            _activeAbility = null;
+            _isDodging = false;
+            _isBlocking = false;
             ResetAbilities();
+
+            _animator.SetIsMoving(false);
         }
 
         public void Move(float direction)
@@ -90,8 +96,10 @@ namespace MedievalRoguelike.Characters
             Vector2 velocity = _rigidbody.velocity;
             velocity.x = direction * _data.MoveSpeed;
             _rigidbody.velocity = velocity;
-            if (!Mathf.Approximately(direction, 0)) FaceCorrectDirection(direction);
+            bool isMoving = !Mathf.Approximately(direction, 0);
+            if (isMoving) FaceCorrectDirection(direction);
             AttemptToCancelActiveAbility();
+            _animator.SetIsMoving(isMoving);
         }
 
         public void Jump()
@@ -102,6 +110,8 @@ namespace MedievalRoguelike.Characters
             velocity.y = Mathf.Sqrt(-2 * _data.Gravity * Physics2D.gravity.y * _data.JumpHeight);
             _rigidbody.velocity = velocity;
             AttemptToCancelActiveAbility();
+            _animator.SetIsJumping(true);
+            _animator.SetIsInAir(true);
         }
 
         public void UseAbility(AbilityType type)
@@ -116,10 +126,9 @@ namespace MedievalRoguelike.Characters
 
         public void PlayAttackAnimation(AbilityType type)
         {
-            int animationNumber = 0;
-            if (type == AbilityType.Attack1) animationNumber = 1;
-            else if (type == AbilityType.Attack2) animationNumber = 2;
-            else if (type == AbilityType.Attack3) animationNumber = 3;
+            if (type == AbilityType.Attack1) _animator.TriggerAttack1();
+            else if (type == AbilityType.Attack2) _animator.TriggerAttack2();
+            else if (type == AbilityType.Attack3) _animator.TriggerAttack3();
         }
 
         public void StartDodge()
@@ -128,12 +137,14 @@ namespace MedievalRoguelike.Characters
             _dodgeData = (DodgeSO)_activeAbility.Data;
             _rigidbody.velocity = _dodgeData.DodgeSpeed * transform.right;
             _hitbox.enabled = false;
+            _animator.SetIsDodging(true);
         }
 
         public void EndDodge()
         {
             _isDodging = false;
             _hitbox.enabled = true;
+            _animator.SetIsDodging(false);
         }
 
         public void StartBlock()
@@ -141,11 +152,13 @@ namespace MedievalRoguelike.Characters
             _isBlocking = true;
             _blockData = (BlockSO)_activeAbility.Data;
             ((Block)_activeAbility).CancelBlock = CancelBlock;
+            _animator.SetIsBlocking(true);
         }
 
         public void EndBlock()
         {
             _isBlocking = false;
+            _animator.SetIsBlocking(false);
         }
 
         public void CancelBlock()
@@ -172,6 +185,7 @@ namespace MedievalRoguelike.Characters
             float actualAmount = _isBlocking ? (1 - _blockData.BlockPercentage) * amount : amount;
             _health = Mathf.Clamp(_health - actualAmount, 0, _data.MaxHealth);
             if (Mathf.Approximately(_health, 0)) Die();
+            _animator.TriggerHit();
             return _isDead;
         }
 
@@ -193,9 +207,20 @@ namespace MedievalRoguelike.Characters
 
         protected void DetectGround()
         {
+            bool wasGrounded = _isGrounded;
             _isGrounded = Mathf.Approximately(_rigidbody.velocity.y, 0)
                 && Physics2D.BoxCast(transform.position, _data.GroundCheckSize,
                     0, -transform.up, _data.GroundCheckDistance, _groundLayer);
+
+            if (_isGrounded && !wasGrounded)
+            {
+                _animator.SetIsJumping(false);
+                _animator.SetIsInAir(false);
+            }
+            else if (!_isGrounded && wasGrounded)
+            {
+                _animator.SetIsInAir(true);
+            }
         }
 
         protected void UpdateAbilities()
@@ -231,6 +256,7 @@ namespace MedievalRoguelike.Characters
             _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
             _hitbox.enabled = false;
             _onDeath?.Invoke(this);
+            _animator.TriggerDie();
         }
     }
 }

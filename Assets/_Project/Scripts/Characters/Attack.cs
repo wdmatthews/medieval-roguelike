@@ -19,8 +19,6 @@ namespace MedievalRoguelike.Characters
         public override void Use(Character character)
         {
             character.PlayAttackAnimation(_attackData.Type);
-            // TODO REMOVE TEMPORARY
-            OnAnimationTick(character);
         }
 
         public override bool CanBeCancelledBy(AbilitySO ability)
