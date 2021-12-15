@@ -53,7 +53,7 @@ namespace MedievalRoguelike.Characters
             }
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             if (_isDead) return;
             UpdateAbilities();
@@ -140,9 +140,10 @@ namespace MedievalRoguelike.Characters
             _animator.SetIsDodging(true);
         }
 
-        public void EndDodge()
+        public virtual void EndDodge()
         {
             _isDodging = false;
+            _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
             _hitbox.enabled = true;
             _animator.SetIsDodging(false);
         }
@@ -179,7 +180,7 @@ namespace MedievalRoguelike.Characters
             _activeAbility = null;
         }
 
-        public bool TakeDamage(float amount)
+        public virtual bool TakeDamage(float amount)
         {
             if (_isDead || _isDodging) return true;
             float actualAmount = _isBlocking ? (1 - _blockData.BlockPercentage) * amount : amount;

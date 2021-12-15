@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5bba8f6dbf04f21a4a5deb41a59548, type: 3}
-  m_Name: Player Manager
+  m_Script: {fileID: 11500000, guid: 6571288c446d34cfa9cd2099a32ba4b0, type: 3}
+  m_Name: Game HUD
   m_EditorClassIdentifier: 
-  _playerPrefabs:
-  - {fileID: 2886235312584171417, guid: 710dffdac2afd4383b25f6a003169844, type: 3}
-  _gameHUDReference: {fileID: 11400000, guid: bb706244e6a504aab9319c76a39fee30, type: 2}

@@ -61,6 +61,7 @@ MonoBehaviour:
   _opponentLayer:
     serializedVersion: 2
     m_Bits: 1024
+  _input: {fileID: 2886235312584171414}
 --- !u!114 &6936201637710432176
 MonoBehaviour:
   m_ObjectHideFlags: 0

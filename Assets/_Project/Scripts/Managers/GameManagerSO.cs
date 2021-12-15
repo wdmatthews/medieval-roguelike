@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MedievalRoguelike.Rooms;
+using MedievalRoguelike.UI;
 
 namespace MedievalRoguelike.Managers
 {
@@ -11,11 +12,13 @@ namespace MedievalRoguelike.Managers
         [SerializeField] private int _maxDifficulty;
         [SerializeField] private int _roomsUntilDifficultyChange;
         [SerializeField] private PlayerManagerSO _playerManager;
+        [SerializeField] private GameHUDSO _gameHUDReference;
 
         [System.NonSerialized] private int _difficulty;
         [System.NonSerialized] private RegionSO _currentRegion;
         [System.NonSerialized] private Room _currentRoom;
         [System.NonSerialized] private int _roomsLeftUntilDifficultyChange;
+        [System.NonSerialized] private GameHUD _gameHUD;
 
         public void StartGame()
         {
@@ -24,6 +27,8 @@ namespace MedievalRoguelike.Managers
             _playerManager.EndGame = EndGame;
             _currentRegion = GetNextRegion();
             SpawnRoom(GetNextRoom());
+            _gameHUD = _gameHUDReference.HUD;
+            _gameHUD.UpdateDifficulty(_difficulty);
         }
 
         private void SpawnRoom(Room roomPrefab)
@@ -47,6 +52,7 @@ namespace MedievalRoguelike.Managers
             _difficulty++;
             _roomsLeftUntilDifficultyChange = _roomsUntilDifficultyChange;
             _currentRegion = GetNextRegion();
+            _gameHUD.UpdateDifficulty(_difficulty);
         }
 
         private RegionSO GetNextRegion()

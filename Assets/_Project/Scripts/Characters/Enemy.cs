@@ -9,6 +9,18 @@ namespace MedievalRoguelike.Characters
 
         public EnemySO EnemyData => (EnemySO)_data;
 
+        protected override void Update()
+        {
+            base.Update();
+
+            if (_target)
+            {
+                FollowTarget();
+                UseAbilities();
+            }
+            else ChooseTarget();
+        }
+
         private void ChooseTarget()
         {
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MedievalRoguelike.Characters;
+using MedievalRoguelike.UI;
 
 namespace MedievalRoguelike.Managers
 {
@@ -8,6 +9,7 @@ namespace MedievalRoguelike.Managers
     public class PlayerManagerSO : ScriptableObject
     {
         [SerializeField] private Player[] _playerPrefabs;
+        [SerializeField] private GameHUDSO _gameHUDReference;
 
         [System.NonSerialized] private Player[] _players;
         [System.NonSerialized] private List<Player> _alivePlayers;
@@ -23,11 +25,13 @@ namespace MedievalRoguelike.Managers
             _players = new Player[playerCount];
             _alivePlayers = new List<Player>();
             _alivePlayerCount = playerCount;
+            GameHUD gameHUD = _gameHUDReference.HUD;
 
             for (int i = 0; i < playerCount; i++)
             {
-                Player player = Instantiate(prefabs[i]);
-                player.Spawn(null, OnPlayerDeath);
+                Player prefab = prefabs[i];
+                Player player = Instantiate(prefab);
+                player.Spawn(null, OnPlayerDeath, gameHUD.AddPlayerHUD(prefab.name, 1));
                 _players[i] = player;
                 _alivePlayers.Add(player);
             }
