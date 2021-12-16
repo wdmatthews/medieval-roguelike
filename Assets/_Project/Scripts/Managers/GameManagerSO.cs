@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using MedievalRoguelike.Characters;
 using MedievalRoguelike.Rooms;
 using MedievalRoguelike.UI;
 
@@ -12,6 +13,7 @@ namespace MedievalRoguelike.Managers
         [SerializeField] private int _maxDifficulty;
         [SerializeField] private int _roomsUntilDifficultyChange;
         [SerializeField] private PlayerManagerSO _playerManager;
+        [SerializeField] private PlayerListSO _alivePlayers;
         [SerializeField] private GameHUDSO _gameHUDReference;
 
         [System.NonSerialized] private int _difficulty;
@@ -35,7 +37,7 @@ namespace MedievalRoguelike.Managers
         {
             if (_currentRoom) Destroy(_currentRoom.gameObject);
             Room room = roomPrefab.SpawnRoom(NextRoom);
-            room.SpawnPlayers(_playerManager.AlivePlayers);
+            room.SpawnPlayers(_alivePlayers.Players);
             room.SpawnEnemies(Mathf.Clamp(_difficulty, 1, _maxDifficulty));
             _currentRoom = room;
         }

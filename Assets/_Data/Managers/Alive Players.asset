@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54dec333e887245f1858f93da262b0e1, type: 3}
-  m_Name: Enemy Dodge
+  m_Script: {fileID: 11500000, guid: 41fd27fcf2547414f98d3fa926be0fb8, type: 3}
+  m_Name: Alive Players
   m_EditorClassIdentifier: 
-  _dodgeSpeed: 7.5
-  _cooldownDuration: 5

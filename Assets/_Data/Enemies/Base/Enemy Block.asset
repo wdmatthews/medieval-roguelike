@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockPercentage: 0.5
   _minBlockDuration: 1
-  _maxBlockDuration: 3
-  _cooldownDuration: 1
+  _maxBlockDuration: 2
+  _cooldownDuration: 2

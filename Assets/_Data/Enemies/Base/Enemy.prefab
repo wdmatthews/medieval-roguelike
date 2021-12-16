@@ -60,6 +60,7 @@ MonoBehaviour:
   _opponentLayer:
     serializedVersion: 2
     m_Bits: 512
+  _alivePlayers: {fileID: 11400000, guid: c7f9bb1780c8b4ba0b67016138c54ca4, type: 2}
 --- !u!114 &5394906636148100360
 MonoBehaviour:
   m_ObjectHideFlags: 0

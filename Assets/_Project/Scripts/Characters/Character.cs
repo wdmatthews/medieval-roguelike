@@ -36,7 +36,7 @@ namespace MedievalRoguelike.Characters
         public int Points { get; set; }
         public int Kills { get; set; }
 
-        protected void Start()
+        protected virtual void Start()
         {
             _rigidbody.gravityScale = _data.Gravity;
             int abilityCount = _data.Abilities.Length;

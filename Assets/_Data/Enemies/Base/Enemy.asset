@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 1
   _moveSpeed: 4
-  _jumpHeight: 2.5
+  _jumpHeight: 3.5
   _gravity: 3
   _canJump: 1
   _groundCheckPosition: 0.5
@@ -27,3 +27,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: feef11ce564cd499fa3ba0cee6b35109, type: 2}
   _pointValue: 1
   _difficulty: 1
+  _followStopDistance: 0.5
+  _distanceNeededToJump: 1
+  _canRetarget: 1
+  _retargetCooldown: 1
+  _distanceNeededToDefend: 2
+  _distanceNeededToAttack: 2
