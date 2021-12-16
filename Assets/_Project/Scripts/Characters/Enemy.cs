@@ -22,8 +22,8 @@ namespace MedievalRoguelike.Characters
         {
             base.Start();
             _enemyData = (EnemySO)_data;
-            _dodge = (Dodge)_abilitiesByType[AbilityType.Dodge];
-            _block = (Block)_abilitiesByType[AbilityType.Block];
+            if (_abilitiesByType.ContainsKey(AbilityType.Dodge)) _dodge = (Dodge)_abilitiesByType[AbilityType.Dodge];
+            if (_abilitiesByType.ContainsKey(AbilityType.Block)) _block = (Block)_abilitiesByType[AbilityType.Block];
             _retargetTimer = _enemyData.RetargetCooldown;
             _possibleTargets = new List<Player>();
 

@@ -44,6 +44,20 @@ namespace MedievalRoguelike.Managers
             }
         }
 
+        public (int, int) GetPointsAndKills()
+        {
+            int totalPoints = 0;
+            int totalKills = 0;
+
+            foreach (Player player in _players)
+            {
+                totalPoints += player.Points;
+                totalKills += player.Kills;
+            }
+
+            return (totalPoints, totalKills);
+        }
+
         private void OnPlayerDeath(Character player)
         {
             _alivePlayerCount--;

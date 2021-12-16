@@ -19,3 +19,4 @@ MonoBehaviour:
   _playerManager: {fileID: 11400000, guid: 8a4a6db3cc51247e987799dc721ea92f, type: 2}
   _alivePlayers: {fileID: 11400000, guid: c7f9bb1780c8b4ba0b67016138c54ca4, type: 2}
   _gameHUDReference: {fileID: 11400000, guid: bb706244e6a504aab9319c76a39fee30, type: 2}
+  _gameOverWindowReference: {fileID: 11400000, guid: 1ca842dbdfd6041d5939d0142fcd0030, type: 2}

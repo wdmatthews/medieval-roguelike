@@ -8,17 +8,23 @@ namespace MedievalRoguelike.UI
     {
         [SerializeField] private UIDocument _document;
         [SerializeField] private VisualTreeAsset _playerHUDAsset;
-        [SerializeField] private GameHUDSO _gameHUD;
+        [SerializeField] private GameHUDSO _referenceToSelf;
 
+        private VisualElement _container;
         private VisualElement _playerHUDContainer;
         private Label _difficultyLabel;
 
         private void Awake()
         {
-            VisualElement container = _document.rootVisualElement;
-            _playerHUDContainer = container.Q("PlayerHUDs");
-            _difficultyLabel = container.Q<Label>("Difficulty");
-            _gameHUD.HUD = this;
+            _container = _document.rootVisualElement;
+            _playerHUDContainer = _container.Q("PlayerHUDs");
+            _difficultyLabel = _container.Q<Label>("Difficulty");
+            _referenceToSelf.HUD = this;
+        }
+
+        public void Hide()
+        {
+            _container.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
         }
 
         public PlayerHUD AddPlayerHUD(string name, float healthPercent)

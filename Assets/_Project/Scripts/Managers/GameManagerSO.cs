@@ -15,22 +15,27 @@ namespace MedievalRoguelike.Managers
         [SerializeField] private PlayerManagerSO _playerManager;
         [SerializeField] private PlayerListSO _alivePlayers;
         [SerializeField] private GameHUDSO _gameHUDReference;
+        [SerializeField] private GameOverWindowSO _gameOverWindowReference;
 
         [System.NonSerialized] private int _difficulty;
+        [System.NonSerialized] private int _totalRoomsCleared;
         [System.NonSerialized] private RegionSO _currentRegion;
         [System.NonSerialized] private Room _currentRoom;
         [System.NonSerialized] private int _roomsLeftUntilDifficultyChange;
         [System.NonSerialized] private GameHUD _gameHUD;
+        [System.NonSerialized] private GameOverWindow _gameOverWindow;
 
         public void StartGame()
         {
             _difficulty = 1;
+            _totalRoomsCleared = 0;
             _roomsLeftUntilDifficultyChange = _roomsUntilDifficultyChange;
             _playerManager.EndGame = EndGame;
             _currentRegion = GetNextRegion();
             SpawnRoom(GetNextRoom());
             _gameHUD = _gameHUDReference.HUD;
             _gameHUD.UpdateDifficulty(_difficulty);
+            _gameOverWindow = _gameOverWindowReference.Window;
         }
 
         private void SpawnRoom(Room roomPrefab)
@@ -44,6 +49,7 @@ namespace MedievalRoguelike.Managers
 
         private void NextRoom()
         {
+            _totalRoomsCleared++;
             _roomsLeftUntilDifficultyChange--;
             if (_roomsLeftUntilDifficultyChange == 0) IncreaseDifficulty();
             SpawnRoom(GetNextRoom());
@@ -78,6 +84,9 @@ namespace MedievalRoguelike.Managers
         {
             _playerManager.TurnOffPlayers();
             Destroy(_currentRoom.gameObject);
+            _gameHUD.Hide();
+            (int totalPoints, int totalKills) = _playerManager.GetPointsAndKills();
+            _gameOverWindow.Open(_difficulty, _totalRoomsCleared, totalPoints, totalKills);
         }
     }
 }
