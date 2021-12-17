@@ -1,0 +1,170 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3198388165728221493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3198388165728221495}
+  - component: {fileID: 7605124622328770272}
+  - component: {fileID: 3198388165728221494}
+  m_Layer: 0
+  m_Name: Player Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3198388165728221495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198388165728221493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7605124622328770272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198388165728221493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e62c4c458224710a742bb3ec065293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerManager: {fileID: 11400000, guid: 8a4a6db3cc51247e987799dc721ea92f, type: 2}
+--- !u!114 &3198388165728221494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198388165728221493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1a0c7fa9adae5451ea69bee99a598443, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a9e7adb5-aa0e-410e-93e3-9a6ff7a9ba4b
+    m_ActionName: Gameplay/Move[/Keyboard/a,/Keyboard/d,/DualSenseGamepadHID/leftStick/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff8ea63f-8ff5-4e16-9d7e-61a35098b2bb
+    m_ActionName: Gameplay/Jump[/Keyboard/space,/DualSenseGamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 33b2774e-6d28-48a4-962a-16353e9161b0
+    m_ActionName: Gameplay/Attack1[/Keyboard/leftArrow,/DualSenseGamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5c4b6a4-e2f6-4591-bc41-38c0d09eb4df
+    m_ActionName: Gameplay/Attack2[/Keyboard/rightArrow,/DualSenseGamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 42f56e37-33df-41ff-a345-01b5f2ab1efb
+    m_ActionName: Gameplay/Attack3[/Keyboard/upArrow,/DualSenseGamepadHID/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 917c1b90-fb13-4a75-9fd4-17458c95a306
+    m_ActionName: Gameplay/Dodge[/Keyboard/w,/DualSenseGamepadHID/leftTrigger,/DualSenseGamepadHID/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 51a1ea06-48ac-4716-b144-9cf024023fe1
+    m_ActionName: Gameplay/Block[/Keyboard/s,/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7605124622328770272}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Managers.PlayerController, MedievalRoguelike.Managers
+        m_MethodName: SelectPreviousCharacter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b65e29e1-d2bb-43a4-9f66-9e68de2c92bf
+    m_ActionName: CharacterSelection/PreviousCharacter[/Keyboard/a,/Keyboard/leftArrow,/DualSenseGamepadHID/leftStick/left]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7605124622328770272}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Managers.PlayerController, MedievalRoguelike.Managers
+        m_MethodName: SelectNextCharacter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ae506328-d3ef-418d-a603-ba9bc6a94d19
+    m_ActionName: CharacterSelection/NextCharacter[/Keyboard/d,/Keyboard/rightArrow,/DualSenseGamepadHID/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7605124622328770272}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Managers.PlayerController, MedievalRoguelike.Managers
+        m_MethodName: ConfirmSelection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5e30d81-ad98-49e3-b914-268de8565589
+    m_ActionName: CharacterSelection/Confirm[/Keyboard/space,/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7605124622328770272}
+        m_TargetAssemblyTypeName: MedievalRoguelike.Managers.PlayerController, MedievalRoguelike.Managers
+        m_MethodName: CancelSelection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0c8bfb7d-664c-4fa8-a457-0f3bebd2234c
+    m_ActionName: CharacterSelection/Cancel[/Keyboard/backspace,/Keyboard/delete]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: CharacterSelection
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

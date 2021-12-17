@@ -1,17 +1,16 @@
 using UnityEngine;
-using MedievalRoguelike.Characters;
 
 namespace MedievalRoguelike.Managers
 {
-    public class ManagersTest : MonoBehaviour
+    [AddComponentMenu("Medieval Roguelike/Managers/Game Manager")]
+    public class GameManager : MonoBehaviour
     {
         [SerializeField] private PlayerManagerSO _playerManager;
         [SerializeField] private GameManagerSO _gameManager;
-        [SerializeField] private Player[] _playerPrefabs;
 
         private void Start()
         {
-            _playerManager.SpawnPlayers(_playerPrefabs);
+            _playerManager.SpawnPlayers();
             _gameManager.StartGame();
         }
     }

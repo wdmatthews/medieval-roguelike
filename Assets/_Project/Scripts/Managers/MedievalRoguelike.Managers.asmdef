@@ -2,6 +2,7 @@
     "name": "MedievalRoguelike.Managers",
     "rootNamespace": "MedievalRoguelike.Managers",
     "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:0fba698c4d36c448da08a33d6532d355",
         "GUID:ba86b6410e0a748819bca569dc9ed528",
         "GUID:1bc2dd41ec0d546f0ae69b4b20d99975"

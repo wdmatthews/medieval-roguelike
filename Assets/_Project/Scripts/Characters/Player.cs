@@ -12,6 +12,8 @@ namespace MedievalRoguelike.Characters
         private PlayerHUD _hud;
         private InputAction _moveAction;
 
+        public PlayerInput Input => _input;
+
         public override void EndDodge()
         {
             base.EndDodge();

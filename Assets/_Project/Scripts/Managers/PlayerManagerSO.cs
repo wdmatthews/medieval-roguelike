@@ -16,11 +16,23 @@ namespace MedievalRoguelike.Managers
         [System.NonSerialized] private int _alivePlayerCount;
 
         public Player[] PlayerPrefabs => _playerPrefabs;
+        public List<PlayerControllerData> PlayerControllers { get; set; }
         public System.Action EndGame { get; set; }
 
-        public void SpawnPlayers(Player[] prefabs)
+        public bool PrefabWasAlreadyChosen(Player prefab)
         {
-            int playerCount = prefabs.Length;
+            foreach (PlayerControllerData controller in PlayerControllers)
+            {
+                if (controller.SelectionWasConfirmed
+                    && controller.SelectedPlayerPrefab == prefab) return true;
+            }
+
+            return false;
+        }
+
+        public void SpawnPlayers()
+        {
+            int playerCount = PlayerControllers.Count;
             _players = new Player[playerCount];
             _alivePlayers.Players = new List<Player>();
             _alivePlayerCount = playerCount;
@@ -28,8 +40,10 @@ namespace MedievalRoguelike.Managers
 
             for (int i = 0; i < playerCount; i++)
             {
-                Player prefab = prefabs[i];
+                PlayerControllerData playerController = PlayerControllers[i];
+                Player prefab = playerController.SelectedPlayerPrefab;
                 Player player = Instantiate(prefab);
+                playerController.Pair(player.Input);
                 player.Spawn(null, OnPlayerDeath, gameHUD.AddPlayerHUD(prefab.name, 1));
                 _players[i] = player;
                 _alivePlayers.AddPlayer(player);

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefabs:
   - {fileID: 2886235312584171417, guid: 710dffdac2afd4383b25f6a003169844, type: 3}
+  - {fileID: 2886235312584171417, guid: a6fdb99841e7541a3aeaa7b7cb571648, type: 3}
   _gameHUDReference: {fileID: 11400000, guid: bb706244e6a504aab9319c76a39fee30, type: 2}
   _alivePlayers: {fileID: 11400000, guid: c7f9bb1780c8b4ba0b67016138c54ca4, type: 2}
