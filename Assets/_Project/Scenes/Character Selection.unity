@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerManager: {fileID: 11400000, guid: 8a4a6db3cc51247e987799dc721ea92f, type: 2}
+  _gameManager: {fileID: 11400000, guid: 8a35611fd8cc147c88f89274fb0987d6, type: 2}
   _controllerPrefab: {fileID: 7605124622328770272, guid: 920da45febb0a4f29801381368848f9c, type: 3}
   _characterSelectionUI: {fileID: 54888243}
 --- !u!4 &2024172769

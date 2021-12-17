@@ -14,9 +14,16 @@ namespace MedievalRoguelike.Managers
 
         [System.NonSerialized] private Player[] _players;
         [System.NonSerialized] private int _alivePlayerCount;
+        [System.NonSerialized] private List<PlayerControllerData> _playerControllers;
 
         public Player[] PlayerPrefabs => _playerPrefabs;
-        public List<PlayerControllerData> PlayerControllers { get; set; }
+
+        public List<PlayerControllerData> PlayerControllers
+        {
+            get => _playerControllers;
+            set => _playerControllers = value;
+        }
+
         public System.Action EndGame { get; set; }
 
         public bool PrefabWasAlreadyChosen(Player prefab)

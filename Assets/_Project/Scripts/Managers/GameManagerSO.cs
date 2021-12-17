@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using MedievalRoguelike.Characters;
 using MedievalRoguelike.Rooms;
 using MedievalRoguelike.UI;
@@ -25,17 +26,21 @@ namespace MedievalRoguelike.Managers
         [System.NonSerialized] private GameHUD _gameHUD;
         [System.NonSerialized] private GameOverWindow _gameOverWindow;
 
+        public RegionSO[] Regions => _regions;
+        public RegionSO CurrentRegion { get => _currentRegion; set => _currentRegion = value; }
+
         public void StartGame()
         {
             _difficulty = 1;
             _totalRoomsCleared = 0;
             _roomsLeftUntilDifficultyChange = _roomsUntilDifficultyChange;
             _playerManager.EndGame = EndGame;
-            _currentRegion = GetNextRegion();
+            if (!_currentRegion) _currentRegion = GetNextRegion();
             SpawnRoom(GetNextRoom());
             _gameHUD = _gameHUDReference.HUD;
             _gameHUD.UpdateDifficulty(_difficulty);
             _gameOverWindow = _gameOverWindowReference.Window;
+            _gameOverWindow.Continue = Continue;
         }
 
         private void SpawnRoom(Room roomPrefab)
@@ -87,6 +92,11 @@ namespace MedievalRoguelike.Managers
             _gameHUD.Hide();
             (int totalPoints, int totalKills) = _playerManager.GetPointsAndKills();
             _gameOverWindow.Open(_difficulty, _totalRoomsCleared, totalPoints, totalKills);
+        }
+
+        private void Continue()
+        {
+            SceneManager.LoadScene("Character Selection");
         }
     }
 }

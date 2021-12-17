@@ -11,37 +11,59 @@ namespace MedievalRoguelike.Managers
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private PlayerManagerSO _playerManager;
+        [SerializeField] private GameManagerSO _gameManager;
         [SerializeField] private PlayerController _controllerPrefab;
         [SerializeField] private CharacterSelection _characterSelectionUI;
 
         private void Start()
         {
             _characterSelectionUI.OnStartGame = StartGame;
-            if (_playerManager.PlayerControllers == null) _playerManager.PlayerControllers = new List<PlayerControllerData>();
-            if (_playerManager.PlayerControllers.Count > 0) return;
+            _gameManager.CurrentRegion = _gameManager.Regions[Random.Range(0, _gameManager.Regions.Length)];
 
-            foreach (InputDevice device in InputSystem.devices)
+            if (_playerManager.PlayerControllers == null) _playerManager.PlayerControllers = new List<PlayerControllerData>();
+
+            if (_playerManager.PlayerControllers.Count > 0)
             {
-                if (device is Keyboard || device is Gamepad)
+                for (int i = 0; i < _playerManager.PlayerControllers.Count; i++)
                 {
+                    PlayerControllerData controllerData = _playerManager.PlayerControllers[i];
                     PlayerController controller = Instantiate(_controllerPrefab);
                     PlayerInput input = controller.GetComponent<PlayerInput>();
-                    JoinPlayer(controller, input, device);
+                    controllerData.CancelSelection();
+                    controllerData.OnConfirm = OnPlayerConfirmed;
+                    controllerData.OnCancel = OnPlayerCanceled;
+                    JoinPlayer(controller, input, controllerData.Device, controllerData);
+                }
+            }
+            else
+            {
+                foreach (InputDevice device in InputSystem.devices)
+                {
+                    if (device is Keyboard || device is Gamepad)
+                    {
+                        PlayerController controller = Instantiate(_controllerPrefab);
+                        PlayerInput input = controller.GetComponent<PlayerInput>();
+                        JoinPlayer(controller, input, device);
+                    }
                 }
             }
         }
 
-        public void JoinPlayer(PlayerController controller, PlayerInput input, InputDevice device)
+        public void JoinPlayer(PlayerController controller, PlayerInput input,
+            InputDevice device, PlayerControllerData existingControllerData = null)
         {
             InputUser.PerformPairingWithDevice(device, input.user);
             input.SwitchCurrentControlScheme(device);
 
-            PlayerControllerData controllerData = new PlayerControllerData(device,
+            PlayerControllerData controllerData = existingControllerData ?? new PlayerControllerData(device,
                 _playerManager.PlayerControllers.Count, OnPlayerConfirmed, OnPlayerCanceled);
-            controllerData.SelectPlayerPrefab(_playerManager.PlayerPrefabs[0]);
             controller.Data = controllerData;
 
-            _playerManager.PlayerControllers.Add(controllerData);
+            if (existingControllerData == null)
+            {
+                controllerData.SelectPlayerPrefab(_playerManager.PlayerPrefabs[0], 0);
+                _playerManager.PlayerControllers.Add(controllerData);
+            }
         }
 
         private void OnPlayerConfirmed(int index)

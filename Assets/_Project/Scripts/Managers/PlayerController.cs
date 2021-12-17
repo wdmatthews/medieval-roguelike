@@ -8,10 +8,19 @@ namespace MedievalRoguelike.Managers
     {
         [SerializeField] private PlayerManagerSO _playerManager;
 
+        private PlayerControllerData _data;
         private int _selectedPrefabIndex;
         private int _prefabCount;
 
-        public PlayerControllerData Data { get; set; }
+        public PlayerControllerData Data
+        {
+            get => _data;
+            set
+            {
+                _data = value;
+                if (value.SelectedPlayerPrefab) _selectedPrefabIndex = value.SelectedPlayerPrefabIndex;
+            }
+        }
 
         private void Awake()
         {
@@ -50,7 +59,7 @@ namespace MedievalRoguelike.Managers
         private void SelectPrefab(int index)
         {
             _selectedPrefabIndex = index;
-            Data.SelectPlayerPrefab(_playerManager.PlayerPrefabs[_selectedPrefabIndex]);
+            Data.SelectPlayerPrefab(_playerManager.PlayerPrefabs[_selectedPrefabIndex], _selectedPrefabIndex);
         }
     }
 }
