@@ -10,7 +10,7 @@ namespace MedievalRoguelike.Characters
         [SerializeField] private float _jumpHeight;
         [SerializeField] private float _gravity;
         [SerializeField] private bool _canJump;
-        [SerializeField] private float _groundCheckPosition;
+        [SerializeField] private Vector2 _groundCheckPosition;
         [SerializeField] private Vector2 _groundCheckSize;
         [SerializeField] private AbilitySO[] _abilities;
         [SerializeField] private int _pointValue;
@@ -20,7 +20,7 @@ namespace MedievalRoguelike.Characters
         public float JumpHeight => _jumpHeight;
         public float Gravity => _gravity;
         public bool CanJump => _canJump;
-        public float GroundCheckDistance => _groundCheckPosition;
+        public Vector2 GroundCheckPosition => _groundCheckPosition;
         public Vector2 GroundCheckSize => _groundCheckSize;
         public AbilitySO[] Abilities => _abilities;
         public int PointValue => _pointValue;

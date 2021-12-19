@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Enemy Attack 1
   m_EditorClassIdentifier: 
   _type: 0
-  _damage: 1
+  _damage: 0
   _hitboxPosition: {x: 1, y: 0}
   _hitboxSize: {x: 1, y: 1}

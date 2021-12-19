@@ -14,6 +14,7 @@ namespace MedievalRoguelike.Managers
         [SerializeField] private GameManagerSO _gameManager;
         [SerializeField] private PlayerController _controllerPrefab;
         [SerializeField] private CharacterSelection _characterSelectionUI;
+        [SerializeField] private Vector2[] _controllerPositions;
 
         private void Start()
         {
@@ -28,11 +29,10 @@ namespace MedievalRoguelike.Managers
                 {
                     PlayerControllerData controllerData = _playerManager.PlayerControllers[i];
                     PlayerController controller = Instantiate(_controllerPrefab);
-                    PlayerInput input = controller.GetComponent<PlayerInput>();
                     controllerData.CancelSelection();
                     controllerData.OnConfirm = OnPlayerConfirmed;
                     controllerData.OnCancel = OnPlayerCanceled;
-                    JoinPlayer(controller, input, controllerData.Device, controllerData);
+                    JoinPlayer(i, controller, controllerData.Device, controllerData);
                 }
             }
             else
@@ -42,16 +42,16 @@ namespace MedievalRoguelike.Managers
                     if (device is Keyboard || device is Gamepad)
                     {
                         PlayerController controller = Instantiate(_controllerPrefab);
-                        PlayerInput input = controller.GetComponent<PlayerInput>();
-                        JoinPlayer(controller, input, device);
+                        JoinPlayer(_playerManager.PlayerControllers.Count, controller, device);
                     }
                 }
             }
         }
 
-        public void JoinPlayer(PlayerController controller, PlayerInput input,
+        public void JoinPlayer(int index, PlayerController controller,
             InputDevice device, PlayerControllerData existingControllerData = null)
         {
+            PlayerInput input = controller.GetComponent<PlayerInput>();
             InputUser.PerformPairingWithDevice(device, input.user);
             input.SwitchCurrentControlScheme(device);
 
@@ -59,11 +59,14 @@ namespace MedievalRoguelike.Managers
                 _playerManager.PlayerControllers.Count, OnPlayerConfirmed, OnPlayerCanceled);
             controller.Data = controllerData;
 
+            controller.transform.position = _controllerPositions[index];
+
             if (existingControllerData == null)
             {
-                controllerData.SelectPlayerPrefab(_playerManager.PlayerPrefabs[0], 0);
+                controller.SelectPrefab(0);
                 _playerManager.PlayerControllers.Add(controllerData);
             }
+            else controller.SelectPrefab(controllerData.SelectedPlayerPrefabIndex);
         }
 
         private void OnPlayerConfirmed(int index)

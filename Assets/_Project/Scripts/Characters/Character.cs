@@ -116,7 +116,9 @@ namespace MedievalRoguelike.Characters
 
         public void UseAbility(AbilityType type)
         {
-            if (_isDead || _isDodging) return;
+            if (_isDead || _isDodging
+                || type == AbilityType.Dodge && !_isGrounded
+                || type == AbilityType.Block && !_isGrounded) return;
             Ability ability;
             if (!_abilitiesByType.TryGetValue(type, out ability) || !ability.CanUse) return;
             if (_activeAbility != null && !_activeAbility.CanBeCancelledBy(ability.Data)) return;
@@ -210,11 +212,12 @@ namespace MedievalRoguelike.Characters
         {
             bool wasGrounded = _isGrounded;
             _isGrounded = Mathf.Approximately(_rigidbody.velocity.y, 0)
-                && Physics2D.BoxCast(transform.position, _data.GroundCheckSize,
-                    0, -transform.up, _data.GroundCheckDistance, _groundLayer);
+                && Physics2D.OverlapBox((Vector2)transform.position + _data.GroundCheckPosition,
+                    _data.GroundCheckSize, 0, _groundLayer);
 
             if (_isGrounded && !wasGrounded)
             {
+                if (_isBlocking) CancelBlock();
                 _animator.SetIsJumping(false);
                 _animator.SetIsInAir(false);
             }

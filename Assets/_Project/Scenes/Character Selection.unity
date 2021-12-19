@@ -348,7 +348,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -412,6 +412,11 @@ MonoBehaviour:
   _gameManager: {fileID: 11400000, guid: 8a35611fd8cc147c88f89274fb0987d6, type: 2}
   _controllerPrefab: {fileID: 7605124622328770272, guid: 920da45febb0a4f29801381368848f9c, type: 3}
   _characterSelectionUI: {fileID: 54888243}
+  _controllerPositions:
+  - {x: -3, y: -1}
+  - {x: -1, y: -1}
+  - {x: 1, y: -1}
+  - {x: 3, y: -1}
 --- !u!4 &2024172769
 Transform:
   m_ObjectHideFlags: 0

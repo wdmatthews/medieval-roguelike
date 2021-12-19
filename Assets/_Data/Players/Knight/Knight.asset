@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be046f5a0b0843f084159bab37e05c1, type: 3}
+  m_Name: Knight
+  m_EditorClassIdentifier: 
+  _maxHealth: 10
+  _moveSpeed: 4.5
+  _jumpHeight: 3.5
+  _gravity: 3.5
+  _canJump: 1
+  _groundCheckPosition: {x: -0.0625, y: 0}
+  _groundCheckSize: {x: 0.8125, y: 0.0625}
+  _abilities:
+  - {fileID: 11400000, guid: 4c73ca8912cca4510abcea5f343fc454, type: 2}
+  - {fileID: 11400000, guid: 9e565b427c5b242a1abe85d91b453602, type: 2}
+  - {fileID: 11400000, guid: b206c16c737354a5195b065079d87e59, type: 2}
+  - {fileID: 11400000, guid: 51d5234890947442eba96c89a03f3221, type: 2}
+  - {fileID: 11400000, guid: f06db25c0b9354ac1adc5a49d9aaeb2a, type: 2}
+  _pointValue: 1

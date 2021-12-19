@@ -74,7 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557475eb9410e44169bc3b19c8f2b247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2886235312584171410}
   _animator: {fileID: 6151203413190322181}
+  _defaultMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  _hitMaterial: {fileID: 2100000, guid: bec9c6aaa14b34d57a6d240433f75d1f, type: 2}
 --- !u!114 &2886235312584171414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +215,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 42f56e37-33df-41ff-a345-01b5f2ab1efb
     m_ActionName: Gameplay/Attack3[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0c5fba75-cf5d-4262-b3dc-9ad1dfd75826
+    m_ActionName: CharacterSelection/Join[/Keyboard/anyKey]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b65e29e1-d2bb-43a4-9f66-9e68de2c92bf
+    m_ActionName: CharacterSelection/PreviousCharacter[/Keyboard/a,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae506328-d3ef-418d-a603-ba9bc6a94d19
+    m_ActionName: CharacterSelection/NextCharacter[/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5e30d81-ad98-49e3-b914-268de8565589
+    m_ActionName: CharacterSelection/Confirm[/Keyboard/space,/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0c8bfb7d-664c-4fa8-a457-0f3bebd2234c
+    m_ActionName: CharacterSelection/Cancel[/Keyboard/backspace,/Keyboard/delete]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

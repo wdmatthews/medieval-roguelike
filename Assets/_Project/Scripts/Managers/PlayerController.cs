@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MedievalRoguelike.Characters;
 
 namespace MedievalRoguelike.Managers
 {
     [AddComponentMenu("Medieval Roguelike/Managers/Player Controller")]
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private Animator _animator;
         [SerializeField] private PlayerManagerSO _playerManager;
 
         private PlayerControllerData _data;
@@ -56,10 +58,12 @@ namespace MedievalRoguelike.Managers
             Data.CancelSelection();
         }
 
-        private void SelectPrefab(int index)
+        public void SelectPrefab(int index)
         {
             _selectedPrefabIndex = index;
-            Data.SelectPlayerPrefab(_playerManager.PlayerPrefabs[_selectedPrefabIndex], _selectedPrefabIndex);
+            Player prefab = _playerManager.PlayerPrefabs[_selectedPrefabIndex];
+            Data.SelectPlayerPrefab(prefab, _selectedPrefabIndex);
+            _animator.runtimeAnimatorController = prefab.GetComponent<Animator>().runtimeAnimatorController;
         }
     }
 }

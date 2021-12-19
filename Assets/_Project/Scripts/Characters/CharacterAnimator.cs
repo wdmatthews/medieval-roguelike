@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MedievalRoguelike.Characters
 {
-    [AddComponentMenu("Medieval Roguelike/Characters/Character")]
+    [AddComponentMenu("Medieval Roguelike/Characters/Character Animator")]
     public class CharacterAnimator : MonoBehaviour
     {
         private static readonly int _isMovingParameter = Animator.StringToHash("Is Moving");
@@ -17,7 +17,10 @@ namespace MedievalRoguelike.Characters
         private static readonly int _hitParameter = Animator.StringToHash("Hit");
         private static readonly int _dieParameter = Animator.StringToHash("Die");
 
-        [SerializeField] protected Animator _animator;
+        [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private Material _defaultMaterial;
+        [SerializeField] private Material _hitMaterial;
 
         public void SetIsMoving(bool isMoving)
         {
