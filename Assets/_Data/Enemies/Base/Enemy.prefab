@@ -73,7 +73,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557475eb9410e44169bc3b19c8f2b247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5217249404724966420}
   _animator: {fileID: 8100715921411135338}
+  _defaultMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  _hitMaterial: {fileID: 2100000, guid: bec9c6aaa14b34d57a6d240433f75d1f, type: 2}
 --- !u!212 &5217249404724966420
 SpriteRenderer:
   m_ObjectHideFlags: 0
