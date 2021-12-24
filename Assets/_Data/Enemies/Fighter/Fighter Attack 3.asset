@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21dffa081322412b83d4b63bd1648af, type: 3}
   m_Name: Fighter Attack 3
   m_EditorClassIdentifier: 
-  _type: 1
-  _damage: 2
+  _type: 2
+  _damage: 3
   _hitboxPosition: {x: 0.578125, y: 1.15625}
   _hitboxSize: {x: 3.46875, y: 2.3125}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 10
   _moveSpeed: 4.5
-  _jumpHeight: 3.5
+  _jumpHeight: 4.5
   _gravity: 3.5
   _canJump: 1
   _groundCheckPosition: {x: -0.0625, y: 0}

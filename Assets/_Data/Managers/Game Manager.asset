@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Game Manager
   m_EditorClassIdentifier: 
   _regions:
-  - {fileID: 11400000, guid: c0c73b6c5c9cc4885aa752c045a2f2c3, type: 2}
+  - {fileID: 11400000, guid: 846843663a3bf4ab99c89a754bc1aa32, type: 2}
+  - {fileID: 11400000, guid: 639099df992844deba256880dd7d2da2, type: 2}
   _maxDifficulty: 5
   _roomsUntilDifficultyChange: 5
   _playerManager: {fileID: 11400000, guid: 8a4a6db3cc51247e987799dc721ea92f, type: 2}
